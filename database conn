@@ -1,0 +1,25 @@
+private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    try
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","krishnaraj");
+        String sql = "Select * from test where username=? and password=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1,jtxtUserName.getText());
+        pst.setString(2,jtxtPassword.getText());
+        ResultSet rs = pst.executeQuery();
+        if(rs.next())
+        {   JOptionPane.showMessageDialog(null,"Success");
+             login_s info = new login_s();
+             info.setVisible(true);
+        
+        }
+        else
+        { JOptionPane.showMessageDialog(null,"OOMB MAIRE");
+    }
+    }
+    
+    catch(ClassNotFoundException | SQLException e) 
+    {JOptionPane.showMessageDialog(null,e);}
+// TODO add your handling code here:
+    }                                         
